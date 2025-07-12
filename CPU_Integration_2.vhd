@@ -16,7 +16,7 @@ architecture Behavioral of CPU_Integration_2 is
     signal clk_int   : std_logic;
     signal slow_clock_out : std_logic;
 	 signal memory_out	: std_logic_vector(7 downto 0);
-	 signal memory_address: std_logic_vector(7 downto 0);
+	 signal memory_address: std_logic_vector(15 downto 0);
 
     component Internal_Oscillator
         port (
@@ -35,7 +35,7 @@ architecture Behavioral of CPU_Integration_2 is
 	 component RAM
 			generic (
 				DATA_WIDTH : integer := 8;
-				ADDR_WIDTH : integer := 8
+				ADDR_WIDTH : integer := 16
 			);
 			port (
 				clk      		: in  std_logic;
