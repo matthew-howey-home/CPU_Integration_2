@@ -17,6 +17,14 @@ architecture Behavioral of CPU_Integration_2 is
     signal slow_clock_out : std_logic;
 	 signal memory_out	: std_logic_vector(7 downto 0);
 	 signal memory_address: std_logic_vector(15 downto 0);
+	 signal memory_read_enable: std_logic;
+	 signal not_memory_read_enable: std_logic;
+	 signal memory_write_enable: std_logic;
+	 signal not_memory_write_enable: std_logic;
+	 signal Memory_Data_Out: std_logic_vector(7 downto 0);
+	 signal A_Reg_External_Output: std_logic_vector(7 downto 0);
+	 signal X_Reg_External_Output: std_logic_vector(7 downto 0);
+	 signal Y_Reg_External_Output: std_logic_vector(7 downto 0);
 
     component Internal_Oscillator
         port (
@@ -86,17 +94,39 @@ begin
 
  
 		
+		not_memory_read_enable <= not memory_read_enable;
+		not_memory_write_enable <= not memory_write_enable;
+		
 		-- RAM:
 		u_ram: RAM
 		  port map (
 				clk				=> clk_int,
-				read_enable 	=> '0', -- active low, 0 means enable
-				write_enable 	=> '1', -- active low, 1 means don't enable
+				read_enable 	=> not_memory_read_enable, -- active low so invert!
+				write_enable 	=> not_memory_write_enable, -- active low so invert!
 				address			=> memory_address,
 				data_in 			=> (7 downto 0 => '0'),
 				data_out			=> memory_out
 		  );
 	  
+	  u_cpu: CPU
+		port map (
+			Clock			=> clk_int,
+			Slow_Clock	=> slow_clock_out,
+			Reset			=> reset,
+
+			Memory_In	=> memory_out,
+	
+
+			Memory_Out_Low			=> memory_address(7 downto 0),	
+			Memory_Out_High		=> memory_address(15 downto 8),
+			Memory_Read_Enable	=> memory_read_enable,
+			Memory_Write_Enable	=> memory_write_enable,
+			Memory_Data_Out		=> Memory_Data_Out,
+
+			A_Reg_External_Output	=> A_Reg_External_Output,
+			X_Reg_External_Output	=> X_Reg_External_Output,
+			Y_Reg_External_Output	=> Y_Reg_External_Output
+		);
 
     -- leds <= not count;
 	 leds <= not memory_out;
