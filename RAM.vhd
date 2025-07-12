@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity RAM is
     generic (
         DATA_WIDTH : integer := 8;
-        ADDR_WIDTH : integer := 16
+        ADDR_WIDTH : integer := 18
     );
     port (
         clk      				: in  std_logic;

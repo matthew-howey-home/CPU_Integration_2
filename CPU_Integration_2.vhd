@@ -16,7 +16,8 @@ architecture Behavioral of CPU_Integration_2 is
     signal clk_int   : std_logic;
     signal slow_clock_out : std_logic;
 	 signal memory_out	: std_logic_vector(7 downto 0);
-	 signal memory_address: std_logic_vector(15 downto 0);
+	 signal memory_address_low: std_logic_vector(7 downto 0);
+	 signal memory_address_high: std_logic_vector(7 downto 0);
 	 signal memory_read_enable: std_logic;
 	 signal not_memory_read_enable: std_logic;
 	 signal memory_write_enable: std_logic;
@@ -43,7 +44,7 @@ architecture Behavioral of CPU_Integration_2 is
 	 component RAM
 			generic (
 				DATA_WIDTH : integer := 8;
-				ADDR_WIDTH : integer := 16
+				ADDR_WIDTH : integer := 8
 			);
 			port (
 				clk      		: in  std_logic;
@@ -103,7 +104,7 @@ begin
 				clk				=> clk_int,
 				read_enable 	=> not_memory_read_enable, -- active low so invert!
 				write_enable 	=> not_memory_write_enable, -- active low so invert!
-				address			=> memory_address,
+				address			=> memory_address_low,
 				data_in 			=> (7 downto 0 => '0'),
 				data_out			=> memory_out
 		  );
@@ -117,8 +118,8 @@ begin
 			Memory_In	=> memory_out,
 	
 
-			Memory_Out_Low			=> memory_address(7 downto 0),	
-			Memory_Out_High		=> memory_address(15 downto 8),
+			Memory_Out_Low			=> memory_address_low,	
+			Memory_Out_High		=> memory_address_high, -- currently unused
 			Memory_Read_Enable	=> memory_read_enable,
 			Memory_Write_Enable	=> memory_write_enable,
 			Memory_Data_Out		=> Memory_Data_Out,
