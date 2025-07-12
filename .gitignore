@@ -1,0 +1,11 @@
+# Auto-generated build artifacts
+db/
+incremental_db/
+output_files/
+simulation/
+
+# Backup files
+*.bak
+
+# IP UI/editor temp data (optional)
+.qsys_edit/

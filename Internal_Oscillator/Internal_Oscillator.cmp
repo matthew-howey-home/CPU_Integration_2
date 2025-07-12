@@ -1,0 +1,7 @@
+	component Internal_Oscillator is
+		port (
+			clkout : out std_logic;        -- clk
+			oscena : in  std_logic := 'X'  -- oscena
+		);
+	end component Internal_Oscillator;
+
