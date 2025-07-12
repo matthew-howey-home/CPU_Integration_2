@@ -105,7 +105,7 @@ begin
 				read_enable 	=> not_memory_read_enable, -- active low so invert!
 				write_enable 	=> not_memory_write_enable, -- active low so invert!
 				address			=> memory_address_low,
-				data_in 			=> (7 downto 0 => '0'),
+				data_in 			=> Memory_Data_Out,
 				data_out			=> memory_out
 		  );
 	  
