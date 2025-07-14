@@ -15,17 +15,18 @@ architecture Behavioral of CPU_Integration_2 is
 
     signal clk_int   : std_logic;
     signal slow_clock_out : std_logic;
-	 signal memory_out	: std_logic_vector(7 downto 0);
-	 signal memory_address_low: std_logic_vector(7 downto 0);
-	 signal memory_address_high: std_logic_vector(7 downto 0);
-	 signal memory_read_enable: std_logic;
+	 signal Memory_Data_In	: std_logic_vector(7 downto 0);
+	 signal Memory_Address_Low: std_logic_vector(7 downto 0);
+	 signal Memory_Address_High: std_logic_vector(7 downto 0);
+	 signal Memory_Read_Enable: std_logic;
 	 signal not_memory_read_enable: std_logic;
-	 signal memory_write_enable: std_logic;
+	 signal Memory_Write_Enable: std_logic;
 	 signal not_memory_write_enable: std_logic;
 	 signal Memory_Data_Out: std_logic_vector(7 downto 0);
 	 signal A_Reg_External_Output: std_logic_vector(7 downto 0);
 	 signal X_Reg_External_Output: std_logic_vector(7 downto 0);
 	 signal Y_Reg_External_Output: std_logic_vector(7 downto 0);
+	 signal PC_Low_External_Output : std_logic_vector(7 downto 0);
 
     component Internal_Oscillator
         port (
@@ -62,18 +63,19 @@ architecture Behavioral of CPU_Integration_2 is
 			Slow_Clock				: in std_logic; -- all inputs will be enabled only when Slow Clock is on
 			Reset						: in std_logic;
 
-			Memory_In				: in std_logic_vector(7 downto 0);
+			Memory_Data_In				: in std_logic_vector(7 downto 0);
 	
 
-			Memory_Out_Low			: out std_logic_vector(7 downto 0);
-			Memory_Out_High		: out std_logic_vector(7 downto 0);
+			Memory_Address_Low			: out std_logic_vector(7 downto 0);
+			Memory_Address_High		: out std_logic_vector(7 downto 0);
 			Memory_Read_Enable	: out std_logic;
 			Memory_Write_Enable	: out std_logic;
 			Memory_Data_Out		: out std_logic_vector(7 downto 0);
 
 			A_Reg_External_Output	: out std_logic_vector(7 downto 0);
 			X_Reg_External_Output	: out std_logic_vector(7 downto 0);
-			Y_Reg_External_Output	: out std_logic_vector(7 downto 0)
+			Y_Reg_External_Output	: out std_logic_vector(7 downto 0);
+			PC_Low_External_Output	: out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -104,9 +106,9 @@ begin
 				clk				=> clk_int,
 				read_enable 	=> not_memory_read_enable, -- active low so invert!
 				write_enable 	=> not_memory_write_enable, -- active low so invert!
-				address			=> memory_address_low,
+				address			=> Memory_Address_Low,
 				data_in 			=> Memory_Data_Out,
-				data_out			=> memory_out
+				data_out			=> Memory_Data_In
 		  );
 	  
 	  u_cpu: CPU
@@ -115,13 +117,13 @@ begin
 			Slow_Clock	=> slow_clock_out,
 			Reset			=> reset,
 
-			Memory_In	=> memory_out,
+			Memory_Data_In	=> Memory_Data_In,
 	
 
-			Memory_Out_Low			=> memory_address_low,	
-			Memory_Out_High		=> memory_address_high, -- currently unused
-			Memory_Read_Enable	=> memory_read_enable,
-			Memory_Write_Enable	=> memory_write_enable,
+			Memory_Address_Low			=> Memory_Address_Low,	
+			Memory_Address_High		=> Memory_Address_High, -- currently unused
+			Memory_Read_Enable	=> Memory_Read_Enable,
+			Memory_Write_Enable	=> Memory_Write_Enable,
 			Memory_Data_Out		=> Memory_Data_Out,
 
 			A_Reg_External_Output	=> A_Reg_External_Output,
@@ -130,6 +132,6 @@ begin
 		);
 
     -- leds <= not count;
-	 leds <= not memory_out;
+	 leds <= not PC_Low_External_Output;
 
 end Behavioral;
