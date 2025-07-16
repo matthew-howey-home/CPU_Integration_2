@@ -5,7 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity Slow_Clock is
     Port (
         clk      	  : in  std_logic;
-        slow_clock  : out std_logic
+        slow_clock  : out std_logic;
+		  prescaler23	: out std_logic
     );
 end Slow_Clock;
 
@@ -25,4 +26,6 @@ begin
             prev_bit <= prescaler(25);
         end if;
     end process;
+	 -- expose for visible debugging of slow clock
+	 prescaler23 <= prescaler(23);
 end Behavioral;

@@ -15,6 +15,7 @@ architecture Behavioral of CPU_Integration_2 is
 
     signal clk_int   : std_logic;
     signal slow_clock_out : std_logic;
+	 signal prescaler23	: std_logic;
 	 signal Memory_Data_In	: std_logic_vector(7 downto 0);
 	 signal Memory_Address_Low: std_logic_vector(7 downto 0);
 	 signal Memory_Address_High: std_logic_vector(7 downto 0);
@@ -38,7 +39,8 @@ architecture Behavioral of CPU_Integration_2 is
     component Slow_Clock
         port (
             clk      : in  std_logic;
-            slow_clock  : out std_logic
+            slow_clock  : out std_logic;
+				prescaler23	: out std_logic
         );
     end component;
 	 
@@ -92,7 +94,8 @@ begin
     u_slow_clock: Slow_Clock
         port map (
             clk     => clk_int,
-            slow_clock => slow_clock_out
+            slow_clock => slow_clock_out,
+				prescaler23 => prescaler23
         );
 
  
@@ -132,6 +135,7 @@ begin
 		);
 
     -- leds <= not count;
-	 leds <= not PC_Low_External_Output;
+	 leds(7 downto 1) <= (others => '1');
+	 leds(0) <= prescaler23;
 
 end Behavioral;
