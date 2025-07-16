@@ -134,7 +134,7 @@ begin
 			Y_Reg_External_Output	=> Y_Reg_External_Output
 		);
 
-    -- leds <= not count;
+    -- leds <= not PC_Low_External_Output;
 	 leds(7 downto 1) <= (others => '1');
 	 leds(0) <= prescaler23;
 
