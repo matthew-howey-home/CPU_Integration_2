@@ -28,6 +28,7 @@ architecture Behavioral of CPU_Integration_2 is
 	 signal X_Reg_External_Output: std_logic_vector(7 downto 0);
 	 signal Y_Reg_External_Output: std_logic_vector(7 downto 0);
 	 signal PC_Low_External_Output : std_logic_vector(7 downto 0);
+	 signal FSM_Reg_External_Output : std_logic_vector(7 downto 0);
 
     component Internal_Oscillator
         port (
@@ -77,7 +78,8 @@ architecture Behavioral of CPU_Integration_2 is
 			A_Reg_External_Output	: out std_logic_vector(7 downto 0);
 			X_Reg_External_Output	: out std_logic_vector(7 downto 0);
 			Y_Reg_External_Output	: out std_logic_vector(7 downto 0);
-			PC_Low_External_Output	: out std_logic_vector(7 downto 0)
+			PC_Low_External_Output	: out std_logic_vector(7 downto 0);
+			FSM_Reg_External_Output : out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -131,11 +133,16 @@ begin
 
 			A_Reg_External_Output	=> A_Reg_External_Output,
 			X_Reg_External_Output	=> X_Reg_External_Output,
-			Y_Reg_External_Output	=> Y_Reg_External_Output
+			Y_Reg_External_Output	=> Y_Reg_External_Output,
+			FSM_Reg_External_Output => FSM_Reg_External_Output
 		);
 
     -- leds <= not PC_Low_External_Output;
-	 leds(7 downto 1) <= (others => '1');
-	 leds(0) <= prescaler23;
+	 
+	 -- output slow bit of slow clock
+	 -- leds(7 downto 1) <= (others => '1');
+	 -- leds(0) <= prescaler23;
+	 
+	 leds <= not FSM_Reg_External_Output;
 
 end Behavioral;
