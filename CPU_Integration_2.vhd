@@ -138,12 +138,17 @@ begin
 			PC_Low_External_Output	=> PC_Low_External_Output
 		);
 
-    leds <= not PC_Low_External_Output;
+    -- leds <= not PC_Low_External_Output;
+	 -- leds <= not FSM_Reg_External_Output;
+	 -- leds(3 downto 0) <= not FSM_Reg_External_Output(3 downto 0);
+	 -- leds(7 downto 4) <= not PC_Low_External_Output(3 downto 0);
 	 
 	 -- output slow bit of slow clock
 	 -- leds(7 downto 1) <= (others => '1');
 	 -- leds(0) <= prescaler23;
 	 
-	 -- leds <= not FSM_Reg_External_Output;
+	 leds <= not A_Reg_External_Output;
+	 
+	 
 
 end Behavioral;
