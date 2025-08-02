@@ -9,3 +9,4 @@ simulation/
 
 # IP UI/editor temp data (optional)
 .qsys_edit/
+*.qws
