@@ -23,14 +23,22 @@ architecture Behavioral of RAM is
 
     -- Example program initialization
     constant INIT_MEM : ram_type := (
-        16#0000# => x"11",  -- LDA (Imm)
-        16#0001# => x"53",  -- #x53
-        16#0002# => x"11",  -- LDA (Imm)
-        16#0003# => x"02",	 -- #x02
-        16#0004# => x"60",  -- JMP
-        16#0005# => x"00",  --
-        16#0006# => x"04",  -- #x0004
-        others   => (others => '0')  -- Fill rest with zero
+			16#0000# => x"12",	-- LDx (Imm)
+			16#0001# => x"41",	-- #x41
+ 
+			16#0002# => x"42",	-- STX (Abs)
+			16#0003# => x"00",
+			16#0004# => x"F0",	-- x00F0
+ 
+			16#0005# => x"21",	-- LDA (Abs)
+			16#0006# => x"00",	--
+			16#0007# => x"F0",	-- x00F0
+
+			16#0008# => x"60",	-- JMP
+			16#0009# => x"00",
+			16#000A# => x"08",	-- x0008
+
+			others   => (others => '0')  -- Fill rest with zero
     );
 
     -- Internal memory initialized with program
