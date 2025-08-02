@@ -27,8 +27,9 @@ architecture Behavioral of RAM is
         16#0001# => x"53",  -- #x53
         16#0002# => x"11",  -- LDA (Imm)
         16#0003# => x"02",	 -- #x02
-        16#0004# => x"00",
-        16#0005# => x"00",
+        16#0004# => x"60",  -- JMP
+        16#0005# => x"00",  --
+        16#0006# => x"04",  -- #x0004
         others   => (others => '0')  -- Fill rest with zero
     );
 
