@@ -59,6 +59,30 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_location_assignment PIN_21 -to leds[0]
+set_location_assignment PIN_22 -to leds[1]
+set_location_assignment PIN_24 -to leds[2]
+set_location_assignment PIN_25 -to leds[3]
+set_location_assignment PIN_32 -to leds[4]
+set_location_assignment PIN_33 -to leds[5]
+set_location_assignment PIN_38 -to leds[6]
+set_location_assignment PIN_39 -to leds[7]
+set_location_assignment PIN_120 -to reset
+set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/General-Utils/Is_Register_Zero.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/General-Utils/One_Bit_Tristate_Buffer.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/XOR_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/SUB_component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/SHR_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/SHL_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/OR_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/NOT_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/AND_Component.vhd"
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/General-Utils/Three_Bit_Decoder.vhd"
+set_global_assignment -name VHDL_FILE ../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU.vhd
+set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/Storage-Components/Edge_Triggered_Flip_Flop_RTL.vhd"
+set_global_assignment -name VHDL_FILE ../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU_Interface.vhd
 set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Utils/One_Bit_Adder.vhd"
 set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/ALU/ALU-Components/ADD_Component.vhd"
 set_global_assignment -name VHDL_FILE "../../VHDLProjectFiles/CPUProject/MainProject/General-Utils/Eight_Bit_Tristate_Buffer.vhd"
@@ -73,13 +97,4 @@ set_global_assignment -name VHDL_FILE CPU_Integration_2.vhd
 set_global_assignment -name VHDL_FILE RAM.vhd
 set_global_assignment -name VHDL_FILE Slow_Clock.vhd
 set_global_assignment -name SOURCE_FILE .gitignore
-set_location_assignment PIN_21 -to leds[0]
-set_location_assignment PIN_22 -to leds[1]
-set_location_assignment PIN_24 -to leds[2]
-set_location_assignment PIN_25 -to leds[3]
-set_location_assignment PIN_32 -to leds[4]
-set_location_assignment PIN_33 -to leds[5]
-set_location_assignment PIN_38 -to leds[6]
-set_location_assignment PIN_39 -to leds[7]
-set_location_assignment PIN_120 -to reset
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
